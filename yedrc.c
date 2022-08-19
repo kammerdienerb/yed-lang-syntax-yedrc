@@ -179,13 +179,11 @@ void syntax_yedrc_highlight(yed_event *event) {
         word_cpy = strndup(word, word_len);
         if (!!yed_get_command(word_cpy)) {
             for (i = 0; i < word_len; i += 1) {
-                attr = array_item(event->line_attrs, old_col + i - 1);
-                yed_combine_attrs(attr, &key);
+                yed_eline_combine_col_attrs(event, old_col + i, &key);
             }
         } else if (yed_get_ft(word_cpy) != FT_ERR_NOT_FOUND) {
             for (i = 0; i < word_len; i += 1) {
-                attr = array_item(event->line_attrs, old_col + i - 1);
-                yed_combine_attrs(attr, &ty);
+                yed_eline_combine_col_attrs(event, old_col + i, &ty);
             }
         }
         free(word_cpy);
